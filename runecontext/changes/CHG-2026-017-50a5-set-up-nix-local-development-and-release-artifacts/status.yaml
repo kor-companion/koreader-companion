@@ -1,0 +1,24 @@
+schema_version: 1
+id: CHG-2026-017-50a5-set-up-nix-local-development-and-release-artifacts
+title: Set up Nix local development and release artifacts
+status: planned
+type: feature
+size: medium
+verification_status: pending
+context_bundles:
+  - project
+related_specs:
+  - specs/development-and-release.md
+related_decisions:
+  - decisions/use-nix-flake-and-release-signing-boundary.md
+  - decisions/github-release-signs-nix-artifacts.md
+related_changes: []
+depends_on: []
+informed_by: []
+supersedes: []
+superseded_by: []
+created_at: "2026-05-07"
+closed_at: null
+promotion_assessment:
+  status: pending
+  suggested_targets: []

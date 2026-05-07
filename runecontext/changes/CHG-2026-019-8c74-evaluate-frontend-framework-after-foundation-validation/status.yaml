@@ -1,0 +1,30 @@
+schema_version: 1
+id: CHG-2026-019-8c74-evaluate-frontend-framework-after-foundation-validation
+title: Evaluate frontend framework after foundation validation
+status: planned
+type: research
+size: medium
+verification_status: pending
+context_bundles:
+  - project
+related_specs:
+  - specs/frontend-framework-evaluation.md
+related_decisions:
+  - decisions/defer-frontend-framework-selection.md
+related_changes: []
+depends_on:
+  - CHG-2026-002-966f-build-headless-capability-foundation
+  - CHG-2026-003-776b-implement-kobo-desktop-discovery-and-dry-run-preflight
+  - CHG-2026-004-5d52-implement-koreader-release-fetching-and-payload-validation
+  - CHG-2026-005-49bc-implement-safe-kobo-koreader-installation-workflow
+  - CHG-2026-006-8e9f-implement-operation-safety-logs-rollback-guidance-and-ejection
+  - CHG-2026-007-5870-implement-koreader-backup-manifest-engine
+  - CHG-2026-008-b629-implement-selective-restore-and-backup-verification
+informed_by: []
+supersedes: []
+superseded_by: []
+created_at: "2026-05-07"
+closed_at: null
+promotion_assessment:
+  status: pending
+  suggested_targets: []

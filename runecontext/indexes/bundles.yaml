@@ -1,0 +1,25 @@
+schema_version: 1
+bundles:
+  - id: project
+    path: bundles/project.yaml
+    extends: []
+    resolved_parents: []
+    referenced_patterns:
+      project:
+        includes:
+          - pattern: project/**
+            kind: glob
+        excludes: []
+      standards:
+        includes: []
+        excludes: []
+      specs:
+        includes:
+          - pattern: specs/**
+            kind: glob
+        excludes: []
+      decisions:
+        includes:
+          - pattern: decisions/**
+            kind: glob
+        excludes: []

@@ -1,0 +1,21 @@
+schema_version: 1
+id: CHG-2026-016-7bd5-add-cross-device-sync-and-advanced-management-suite
+title: Add cross-device sync and advanced management suite
+status: planned
+type: feature
+size: large
+verification_status: pending
+context_bundles:
+  - project
+related_specs: []
+related_decisions: []
+related_changes: []
+depends_on: []
+informed_by: []
+supersedes: []
+superseded_by: []
+created_at: "2026-05-07"
+closed_at: null
+promotion_assessment:
+  status: pending
+  suggested_targets: []

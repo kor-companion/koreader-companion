@@ -1,0 +1,25 @@
+schema_version: 1
+id: CHG-2026-002-966f-build-headless-capability-foundation
+title: Build capability-based headless foundation
+status: planned
+type: feature
+size: large
+verification_status: pending
+context_bundles:
+  - project
+related_specs:
+  - specs/capability-architecture.md
+related_decisions:
+  - decisions/capability-based-architecture.md
+  - decisions/defer-frontend-framework-selection.md
+  - decisions/kobo-desktop-first.md
+related_changes: []
+depends_on: []
+informed_by: []
+supersedes: []
+superseded_by: []
+created_at: "2026-05-07"
+closed_at: null
+promotion_assessment:
+  status: pending
+  suggested_targets: []

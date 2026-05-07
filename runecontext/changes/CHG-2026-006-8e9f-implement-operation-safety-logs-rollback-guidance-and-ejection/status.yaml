@@ -1,0 +1,21 @@
+schema_version: 1
+id: CHG-2026-006-8e9f-implement-operation-safety-logs-rollback-guidance-and-ejection
+title: Implement operation safety logs rollback guidance and ejection
+status: planned
+type: feature
+size: medium
+verification_status: pending
+context_bundles:
+  - project
+related_specs: []
+related_decisions: []
+related_changes: []
+depends_on: []
+informed_by: []
+supersedes: []
+superseded_by: []
+created_at: "2026-05-07"
+closed_at: null
+promotion_assessment:
+  status: pending
+  suggested_targets: []

@@ -1,0 +1,23 @@
+schema_version: 1
+id: CHG-2026-011-f1f3-add-pocketbook-and-expanded-usb-mass-storage-targets
+title: Add PocketBook and expanded USB mass storage targets
+status: planned
+type: feature
+size: large
+verification_status: pending
+context_bundles:
+  - project
+related_specs:
+  - specs/platform-expansion.md
+related_decisions:
+  - decisions/capability-based-architecture.md
+related_changes: []
+depends_on: []
+informed_by: []
+supersedes: []
+superseded_by: []
+created_at: "2026-05-07"
+closed_at: null
+promotion_assessment:
+  status: pending
+  suggested_targets: []

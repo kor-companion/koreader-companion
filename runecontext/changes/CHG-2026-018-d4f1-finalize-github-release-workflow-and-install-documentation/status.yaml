@@ -1,0 +1,25 @@
+schema_version: 1
+id: CHG-2026-018-d4f1-finalize-github-release-workflow-and-install-documentation
+title: Finalize GitHub release workflow and install documentation
+status: planned
+type: feature
+size: medium
+verification_status: pending
+context_bundles:
+  - project
+related_specs:
+  - specs/development-and-release.md
+related_decisions:
+  - decisions/github-release-signs-nix-artifacts.md
+related_changes: []
+depends_on:
+  - CHG-2026-017-50a5-set-up-nix-local-development-and-release-artifacts
+  - CHG-2026-009-e6bd-prepare-mvp-community-beta-and-release-packaging
+informed_by: []
+supersedes: []
+superseded_by: []
+created_at: "2026-05-07"
+closed_at: null
+promotion_assessment:
+  status: pending
+  suggested_targets: []

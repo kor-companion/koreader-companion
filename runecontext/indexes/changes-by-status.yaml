@@ -1,0 +1,103 @@
+schema_version: 1
+statuses:
+  proposed: []
+  planned:
+    - id: CHG-2026-001-4104-define-korcompanion-product-foundation
+      title: Define KORCompanion product foundation
+      type: project
+      size: medium
+      path: changes/CHG-2026-001-4104-define-korcompanion-product-foundation/status.yaml
+    - id: CHG-2026-002-966f-build-headless-capability-foundation
+      title: Build capability-based headless foundation
+      type: feature
+      size: large
+      path: changes/CHG-2026-002-966f-build-headless-capability-foundation/status.yaml
+    - id: CHG-2026-003-776b-implement-kobo-desktop-discovery-and-dry-run-preflight
+      title: Implement Kobo desktop discovery and dry-run preflight
+      type: feature
+      size: medium
+      path: changes/CHG-2026-003-776b-implement-kobo-desktop-discovery-and-dry-run-preflight/status.yaml
+    - id: CHG-2026-004-5d52-implement-koreader-release-fetching-and-payload-validation
+      title: Implement KOReader release fetching and payload validation
+      type: feature
+      size: medium
+      path: changes/CHG-2026-004-5d52-implement-koreader-release-fetching-and-payload-validation/status.yaml
+    - id: CHG-2026-005-49bc-implement-safe-kobo-koreader-installation-workflow
+      title: Implement safe Kobo KOReader installation workflow
+      type: feature
+      size: large
+      path: changes/CHG-2026-005-49bc-implement-safe-kobo-koreader-installation-workflow/status.yaml
+    - id: CHG-2026-006-8e9f-implement-operation-safety-logs-rollback-guidance-and-ejection
+      title: Implement operation safety logs rollback guidance and ejection
+      type: feature
+      size: medium
+      path: changes/CHG-2026-006-8e9f-implement-operation-safety-logs-rollback-guidance-and-ejection/status.yaml
+    - id: CHG-2026-007-5870-implement-koreader-backup-manifest-engine
+      title: Implement KOReader backup manifest engine
+      type: feature
+      size: large
+      path: changes/CHG-2026-007-5870-implement-koreader-backup-manifest-engine/status.yaml
+    - id: CHG-2026-008-b629-implement-selective-restore-and-backup-verification
+      title: Implement selective restore and backup verification
+      type: feature
+      size: large
+      path: changes/CHG-2026-008-b629-implement-selective-restore-and-backup-verification/status.yaml
+    - id: CHG-2026-009-e6bd-prepare-mvp-community-beta-and-release-packaging
+      title: Prepare MVP community beta and release packaging
+      type: feature
+      size: medium
+      path: changes/CHG-2026-009-e6bd-prepare-mvp-community-beta-and-release-packaging/status.yaml
+    - id: CHG-2026-010-8a3b-add-narrow-koreader-configuration-management
+      title: Add narrow KOReader configuration management
+      type: feature
+      size: large
+      path: changes/CHG-2026-010-8a3b-add-narrow-koreader-configuration-management/status.yaml
+    - id: CHG-2026-011-f1f3-add-pocketbook-and-expanded-usb-mass-storage-targets
+      title: Add PocketBook and expanded USB mass storage targets
+      type: feature
+      size: large
+      path: changes/CHG-2026-011-f1f3-add-pocketbook-and-expanded-usb-mass-storage-targets/status.yaml
+    - id: CHG-2026-012-7f08-add-kindle-unlocked-state-detection-and-supported-install-flows
+      title: Add Kindle unlocked-state detection and supported install flows
+      type: feature
+      size: large
+      path: changes/CHG-2026-012-7f08-add-kindle-unlocked-state-detection-and-supported-install-flows/status.yaml
+    - id: CHG-2026-013-7337-add-android-adb-device-workflow
+      title: Add Android ADB device workflow
+      type: feature
+      size: large
+      path: changes/CHG-2026-013-7337-add-android-adb-device-workflow/status.yaml
+    - id: CHG-2026-014-bd6b-add-remarkable-ssh-workflow-research-and-implementation
+      title: Add reMarkable SSH workflow research and implementation
+      type: feature
+      size: large
+      path: changes/CHG-2026-014-bd6b-add-remarkable-ssh-workflow-research-and-implementation/status.yaml
+    - id: CHG-2026-015-a715-research-and-add-android-mobile-host-support
+      title: Research and add Android mobile host support
+      type: feature
+      size: large
+      path: changes/CHG-2026-015-a715-research-and-add-android-mobile-host-support/status.yaml
+    - id: CHG-2026-016-7bd5-add-cross-device-sync-and-advanced-management-suite
+      title: Add cross-device sync and advanced management suite
+      type: feature
+      size: large
+      path: changes/CHG-2026-016-7bd5-add-cross-device-sync-and-advanced-management-suite/status.yaml
+    - id: CHG-2026-017-50a5-set-up-nix-local-development-and-release-artifacts
+      title: Set up Nix local development and release artifacts
+      type: feature
+      size: medium
+      path: changes/CHG-2026-017-50a5-set-up-nix-local-development-and-release-artifacts/status.yaml
+    - id: CHG-2026-018-d4f1-finalize-github-release-workflow-and-install-documentation
+      title: Finalize GitHub release workflow and install documentation
+      type: feature
+      size: medium
+      path: changes/CHG-2026-018-d4f1-finalize-github-release-workflow-and-install-documentation/status.yaml
+    - id: CHG-2026-019-8c74-evaluate-frontend-framework-after-foundation-validation
+      title: Evaluate frontend framework after foundation validation
+      type: research
+      size: medium
+      path: changes/CHG-2026-019-8c74-evaluate-frontend-framework-after-foundation-validation/status.yaml
+  implemented: []
+  verified: []
+  closed: []
+  superseded: []

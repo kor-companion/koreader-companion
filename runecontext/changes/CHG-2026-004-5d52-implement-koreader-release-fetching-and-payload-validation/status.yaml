@@ -1,0 +1,22 @@
+schema_version: 1
+id: CHG-2026-004-5d52-implement-koreader-release-fetching-and-payload-validation
+title: Implement KOReader release fetching and payload validation
+status: planned
+type: feature
+size: medium
+verification_status: pending
+context_bundles:
+  - project
+related_specs:
+  - specs/kobo-desktop-mvp.md
+related_decisions: []
+related_changes: []
+depends_on: []
+informed_by: []
+supersedes: []
+superseded_by: []
+created_at: "2026-05-07"
+closed_at: null
+promotion_assessment:
+  status: pending
+  suggested_targets: []
