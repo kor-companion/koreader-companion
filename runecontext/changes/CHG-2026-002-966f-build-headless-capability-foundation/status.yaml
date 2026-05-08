@@ -1,7 +1,7 @@
 schema_version: 1
 id: CHG-2026-002-966f-build-headless-capability-foundation
 title: Build capability-based headless foundation
-status: planned
+status: implemented
 type: feature
 size: large
 verification_status: pending

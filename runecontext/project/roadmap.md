@@ -6,9 +6,6 @@ The MVP should front-load risky, non-frontend foundations before selecting or im
 
 ## MVP
 
-3. `CHG-2026-002-966f-build-headless-capability-foundation` - Build capability-based headless foundation.
-   Create the non-frontend core, SQLite persistence, release service, device/host abstraction boundaries, workflow state model, and shared safety layer so later devices, mobile hosts, and frontend frameworks can be added without re-architecting the core.
-
 4. `CHG-2026-003-776b-implement-kobo-desktop-discovery-and-dry-run-preflight` - Implement Kobo desktop discovery and dry-run preflight.
    Detect mounted Kobo devices on Linux, macOS, and Windows; support manual path selection where necessary; classify readiness; and present a no-write install or backup plan.
 
@@ -72,5 +69,8 @@ The earlier empty Flutter-first foundation change directory, `CHG-2026-002-966f-
 
 2. `CHG-2026-001-4104-define-korcompanion-product-foundation` - Define KORCompanion product foundation.
    Establish the vision, target users, product promise, non-goals, adoption strategy, legal/trust boundaries, and durable product language before implementation begins.
+
+3. `CHG-2026-002-966f-build-headless-capability-foundation` - Build capability-based headless foundation.
+   Create the non-frontend core, SQLite persistence, release service, device/host abstraction boundaries, workflow state model, and shared safety layer so later devices, mobile hosts, and frontend frameworks can be added without re-architecting the core.
 
 
