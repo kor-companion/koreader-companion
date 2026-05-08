@@ -7,11 +7,16 @@ size: large
 verification_status: pending
 context_bundles:
   - project
-related_specs: []
+related_specs:
+  - specs/backup-restore.md
 related_decisions:
   - decisions/defer-general-lua-parser.md
 related_changes: []
-depends_on: []
+depends_on:
+  - CHG-2026-002-966f-build-headless-capability-foundation
+  - CHG-2026-005-49bc-implement-safe-kobo-koreader-installation-workflow
+  - CHG-2026-007-5870-implement-koreader-backup-manifest-engine
+  - CHG-2026-008-b629-implement-selective-restore-and-backup-verification
 informed_by: []
 supersedes: []
 superseded_by: []

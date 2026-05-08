@@ -11,7 +11,8 @@ related_specs:
   - specs/kobo-desktop-mvp.md
 related_decisions: []
 related_changes: []
-depends_on: []
+depends_on:
+  - CHG-2026-002-966f-build-headless-capability-foundation
 informed_by: []
 supersedes: []
 superseded_by: []

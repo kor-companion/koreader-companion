@@ -5,11 +5,14 @@ title: Use Capability-Based Architecture
 originating_changes:
   - CHG-2026-002-966f-build-headless-capability-foundation
 related_changes:
+  - CHG-2026-006-8e9f-implement-operation-safety-logs-rollback-guidance-and-ejection
   - CHG-2026-011-f1f3-add-pocketbook-and-expanded-usb-mass-storage-targets
   - CHG-2026-012-7f08-add-kindle-unlocked-state-detection-and-supported-install-flows
   - CHG-2026-013-7337-add-android-adb-device-workflow
   - CHG-2026-014-bd6b-add-remarkable-ssh-workflow-research-and-implementation
   - CHG-2026-015-a715-research-and-add-android-mobile-host-support
+  - CHG-2026-016-7bd5-add-cross-device-sync-and-advanced-management-suite
+  - CHG-2026-020-a91c-build-mvp-frontend-shell-over-headless-core
 ---
 
 # Use Capability-Based Architecture

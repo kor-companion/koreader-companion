@@ -8,6 +8,7 @@ related_changes:
   - CHG-2026-002-966f-build-headless-capability-foundation
   - CHG-2026-003-776b-implement-kobo-desktop-discovery-and-dry-run-preflight
   - CHG-2026-005-49bc-implement-safe-kobo-koreader-installation-workflow
+  - CHG-2026-006-8e9f-implement-operation-safety-logs-rollback-guidance-and-ejection
 ---
 
 # Build Kobo Desktop First

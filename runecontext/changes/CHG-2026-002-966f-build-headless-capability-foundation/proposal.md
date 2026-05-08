@@ -7,7 +7,9 @@ Create the non-frontend application foundation around host, device, workflow, pe
 The riskiest MVP work is host/device integration: mount discovery, filesystem permissions, path containment, payload validation, backup-before-write, OS sync or safe eject, and operation logging. Those capabilities should be implemented and validated before selecting or building a frontend framework.
 
 ## Proposed Change
-Build a headless core that can produce dry-run plans, execute guarded workflows, persist manifests/logs, and expose workflow state through stable interfaces that any future frontend can consume.
+Build a Rust headless core that can produce dry-run plans, execute guarded workflows, persist manifests/logs, and expose workflow state through stable interfaces that any future frontend can consume.
+
+The core should be organized around shared workflow logic plus host and device modules. Linux, macOS, Windows, and later mobile hosts should implement host access interfaces. Kobo and later device families should implement device target interfaces. Install, backup, restore, release selection, logging, and safety behavior should remain shared.
 
 Do not add Flutter, Material UI, Qt, Electron, Tauri, or other frontend framework commitments in this change.
 
@@ -16,6 +18,7 @@ The risky foundational behavior should be proven before frontend implementation 
 
 ## Assumptions
 - No selectable standards are defined in the project yet; the Applicable Standards section is rendered as N/A.
+- Rust is the default headless-core language unless Kobo implementation evidence uncovers a strong reason to change course.
 - Initial validation can be performed through tests, fixtures, command-line entry points, or small diagnostic tools without a production frontend.
 - Frontend framework selection is deferred to `CHG-2026-019-8c74-evaluate-frontend-framework-after-foundation-validation`.
 

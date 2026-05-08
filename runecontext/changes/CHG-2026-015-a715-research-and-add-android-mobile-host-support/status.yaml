@@ -12,7 +12,10 @@ related_specs:
 related_decisions:
   - decisions/capability-based-architecture.md
 related_changes: []
-depends_on: []
+depends_on:
+  - CHG-2026-002-966f-build-headless-capability-foundation
+  - CHG-2026-003-776b-implement-kobo-desktop-discovery-and-dry-run-preflight
+  - CHG-2026-006-8e9f-implement-operation-safety-logs-rollback-guidance-and-ejection
 informed_by: []
 supersedes: []
 superseded_by: []

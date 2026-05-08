@@ -4,7 +4,8 @@ id: product-scope
 title: Product Scope
 originating_changes:
   - CHG-2026-001-4104-define-korcompanion-product-foundation
-revised_by_changes: []
+revised_by_changes:
+  - CHG-2026-020-a91c-build-mvp-frontend-shell-over-headless-core
 ---
 
 # Product Scope
@@ -14,6 +15,7 @@ KORCompanion is a KOReader companion application. The long-term scope includes i
 ## MVP Scope
 
 - Desktop host app for Linux, macOS, and Windows.
+- Rust headless core with host and device modules behind capability interfaces.
 - Kobo target detection over USB mass storage.
 - Headless foundation and risky workflow validation before production frontend selection.
 - Dry-run preflight for every install and restore operation.
@@ -54,3 +56,7 @@ KORCompanion is a KOReader companion application. The long-term scope includes i
 - Cloud sync.
 - Vendor firmware management.
 - Production frontend implementation before foundational host/device risks are validated.
+
+## Modularity Requirement
+
+Host platforms and companion device targets should be added as modules over shared logic. Linux, macOS, Windows, Android, and possible future iOS host support should implement host access contracts. Kobo, PocketBook, already-compatible Kindle states, Android/ADB devices, reMarkable/SSH targets, and future devices should implement device target contracts. Shared workflows for install, backup, restore, release selection, logging, and safety should not need rearchitecture when a new module is added.

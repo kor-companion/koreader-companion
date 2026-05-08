@@ -9,13 +9,14 @@ Set up the repository around a Nix flake so contributors can enter a predictable
 ## Dev Shell Goals
 
 - Provide a single `nix develop` entrypoint.
-- Include core development, test, formatting, linting, packaging-support, and diagnostic tooling where practical.
+- Include Rust core development, test, formatting, linting, packaging-support, and diagnostic tooling where practical.
 - Include native host/device diagnostic dependencies for Linux where practical.
 - Include common developer tools for formatting, testing, linting, and packaging scripts.
 - Keep dependency versions pinned through `flake.lock`.
 - Use nixpkgs unstable if it is the most practical source for current core, diagnostic, and packaging dependencies.
 - Document host prerequisites that Nix cannot fully abstract, especially for USB/device access testing.
 - Avoid frontend-specific dependencies until `CHG-2026-019-8c74-evaluate-frontend-framework-after-foundation-validation` selects a frontend approach.
+- Document a standard Rust-toolchain path for contributors who are not using Nix where practical, while keeping Nix canonical for CI and release outputs.
 
 ## Nix Layout
 
@@ -53,6 +54,7 @@ This keeps build reproducibility separate from signing authority. Nix should pro
 - Add `flake.nix` and `flake.lock`.
 - Add a root-level `nix/` directory with separate files for the dev shell and future package/check/release logic.
 - Provide at least one default development shell.
+- Provide Rust tooling needed for the headless core, including build, test, format, lint, and SQLite development dependencies where required.
 - Expose a formatter through the flake.
 - Add a placeholder-friendly checks structure so future checks can be added without changing the flake shape.
 - Prefer clear package names and minimal shell hooks over clever automation.

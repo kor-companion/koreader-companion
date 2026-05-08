@@ -14,7 +14,9 @@ related_decisions:
   - decisions/defer-frontend-framework-selection.md
   - decisions/kobo-desktop-first.md
 related_changes: []
-depends_on: []
+depends_on:
+  - CHG-2026-017-50a5-set-up-nix-local-development-and-release-artifacts
+  - CHG-2026-001-4104-define-korcompanion-product-foundation
 informed_by: []
 supersedes: []
 superseded_by: []

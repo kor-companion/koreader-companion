@@ -4,7 +4,9 @@ id: frontend-framework-evaluation
 title: Frontend Framework Evaluation
 originating_changes:
   - CHG-2026-019-8c74-evaluate-frontend-framework-after-foundation-validation
-revised_by_changes: []
+revised_by_changes:
+  - CHG-2026-009-e6bd-prepare-mvp-community-beta-and-release-packaging
+  - CHG-2026-020-a91c-build-mvp-frontend-shell-over-headless-core
 ---
 
 # Frontend Framework Evaluation
@@ -45,4 +47,4 @@ The evaluation must produce:
 - A written comparison of candidates.
 - A recommended frontend approach.
 - A rationale that explicitly states why Flutter was accepted or rejected.
-- Any follow-up frontend implementation change needed before MVP community beta packaging.
+- Confirmation that `CHG-2026-020-a91c-build-mvp-frontend-shell-over-headless-core` remains the right frontend implementation change, or a replacement change if evaluation evidence shows a different implementation split is needed.

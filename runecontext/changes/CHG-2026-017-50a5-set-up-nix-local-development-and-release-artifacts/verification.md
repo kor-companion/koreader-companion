@@ -4,6 +4,7 @@
 - Run `nix flake check` when the flake exposes checks.
 - Run `nix develop` and confirm the shell enters successfully.
 - Run `nix flake show` and confirm the expected formatter, dev shell, checks, and package shape are visible.
+- Run documented Rust commands for build, test, format, and lint once the Rust workspace exists.
 - Run documented core, diagnostic, formatting, linting, and test commands as they become available.
 - Confirm Flutter, Dart, Qt, Tauri, Electron, or other frontend-specific dependencies are not required before frontend evaluation selects them.
 - Confirm the root `flake.nix` delegates meaningful logic to the root-level `nix/` folder.

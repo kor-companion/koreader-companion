@@ -11,9 +11,10 @@ related_specs:
   - specs/frontend-framework-evaluation.md
 related_decisions:
   - decisions/defer-frontend-framework-selection.md
-related_changes: []
+related_changes:
+  - CHG-2026-020-a91c-build-mvp-frontend-shell-over-headless-core
 depends_on:
-  - CHG-2026-019-8c74-evaluate-frontend-framework-after-foundation-validation
+  - CHG-2026-020-a91c-build-mvp-frontend-shell-over-headless-core
 informed_by: []
 supersedes: []
 superseded_by: []

@@ -5,7 +5,7 @@ indexes:
 counts:
   standards: 0
   bundles: 1
-  changes: 19
+  changes: 20
   specs: 7
   decisions: 7
 standards: []
@@ -31,6 +31,7 @@ changes:
   - CHG-2026-017-50a5-set-up-nix-local-development-and-release-artifacts
   - CHG-2026-018-d4f1-finalize-github-release-workflow-and-install-documentation
   - CHG-2026-019-8c74-evaluate-frontend-framework-after-foundation-validation
+  - CHG-2026-020-a91c-build-mvp-frontend-shell-over-headless-core
 specs:
   - specs/backup-restore.md
   - specs/capability-architecture.md

@@ -12,7 +12,9 @@ related_specs:
 related_decisions:
   - decisions/defer-general-lua-parser.md
 related_changes: []
-depends_on: []
+depends_on:
+  - CHG-2026-006-8e9f-implement-operation-safety-logs-rollback-guidance-and-ejection
+  - CHG-2026-007-5870-implement-koreader-backup-manifest-engine
 informed_by: []
 supersedes: []
 superseded_by: []

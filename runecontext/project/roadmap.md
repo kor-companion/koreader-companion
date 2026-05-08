@@ -34,12 +34,15 @@ The MVP should front-load risky, non-frontend foundations before selecting or im
    Let users inspect backups, verify manifests, preview restore operations, and restore selected KOReader data with path containment and backup-before-restore protections.
 
 10. `CHG-2026-019-8c74-evaluate-frontend-framework-after-foundation-validation` - Evaluate frontend framework after foundation validation.
-    Use the validated headless core and risky workflow evidence to compare Flutter, Qt, Tauri, Electron, native, and hybrid approaches. Decide the frontend strategy and produce any follow-up frontend implementation change needed before beta packaging.
+     Use the validated headless core and risky workflow evidence to compare Flutter, Qt, Tauri, Electron, native, and hybrid approaches. Decide the frontend strategy and produce any follow-up frontend implementation change needed before beta packaging.
 
-11. `CHG-2026-009-e6bd-prepare-mvp-community-beta-and-release-packaging` - Prepare MVP community beta and release packaging.
+11. `CHG-2026-020-a91c-build-mvp-frontend-shell-over-headless-core` - Build MVP frontend shell over headless core.
+    Build the production MVP app surface after frontend evaluation selects an approach. Keep the UI as a shell over the Rust headless core: it consumes workflow state, displays plans/logs/progress, and sends commands through the selected integration boundary without owning filesystem, install, backup, restore, or eject logic.
+
+12. `CHG-2026-009-e6bd-prepare-mvp-community-beta-and-release-packaging` - Prepare MVP community beta and release packaging.
     Package desktop builds, publish supported device and firmware notes, prepare onboarding and recovery documentation, and validate the MVP with community beta users.
 
-12. `CHG-2026-018-d4f1-finalize-github-release-workflow-and-install-documentation` - Finalize GitHub release workflow and install documentation.
+13. `CHG-2026-018-d4f1-finalize-github-release-workflow-and-install-documentation` - Finalize GitHub release workflow and install documentation.
     Finish the MVP release path by adding a GitHub release workflow that consumes unsigned Nix artifacts, signs and publishes release assets, and documents end-user installation in `README.md`.
 
 ## Post-MVP
@@ -65,7 +68,6 @@ The MVP should front-load risky, non-frontend foundations before selecting or im
 7. `CHG-2026-016-7bd5-add-cross-device-sync-and-advanced-management-suite` - Add cross-device sync and advanced management suite.
    Evolve the product into a multi-device KOReader management suite with migration, restore profiles, cross-device backup workflows, health checks, and advanced operations.
 
-## Superseded
+## Removed Superseded Work
 
-1. `CHG-2026-002-966f-build-capability-based-flutter-desktop-foundation` - Build capability-based Flutter desktop foundation.
-   Superseded by `CHG-2026-002-966f-build-headless-capability-foundation` and `CHG-2026-019-8c74-evaluate-frontend-framework-after-foundation-validation`. The original Flutter-first foundation is retained here so every change directory under `runecontext/changes/` is represented in this roadmap.
+The earlier empty Flutter-first foundation change directory, `CHG-2026-002-966f-build-capability-based-flutter-desktop-foundation`, was removed after being superseded by the headless core and frontend evaluation changes. The roadmap now tracks the active headless-first path only.

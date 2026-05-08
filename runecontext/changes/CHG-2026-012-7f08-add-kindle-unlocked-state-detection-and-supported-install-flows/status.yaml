@@ -13,7 +13,10 @@ related_decisions:
   - decisions/capability-based-architecture.md
   - decisions/no-jailbreak-automation.md
 related_changes: []
-depends_on: []
+depends_on:
+  - CHG-2026-002-966f-build-headless-capability-foundation
+  - CHG-2026-005-49bc-implement-safe-kobo-koreader-installation-workflow
+  - CHG-2026-006-8e9f-implement-operation-safety-logs-rollback-guidance-and-ejection
 informed_by: []
 supersedes: []
 superseded_by: []

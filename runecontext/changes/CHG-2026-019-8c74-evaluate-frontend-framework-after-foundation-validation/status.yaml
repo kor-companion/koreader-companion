@@ -2,7 +2,7 @@ schema_version: 1
 id: CHG-2026-019-8c74-evaluate-frontend-framework-after-foundation-validation
 title: Evaluate frontend framework after foundation validation
 status: planned
-type: research
+type: x-research
 size: medium
 verification_status: pending
 context_bundles:
@@ -11,7 +11,8 @@ related_specs:
   - specs/frontend-framework-evaluation.md
 related_decisions:
   - decisions/defer-frontend-framework-selection.md
-related_changes: []
+related_changes:
+  - CHG-2026-020-a91c-build-mvp-frontend-shell-over-headless-core
 depends_on:
   - CHG-2026-002-966f-build-headless-capability-foundation
   - CHG-2026-003-776b-implement-kobo-desktop-discovery-and-dry-run-preflight

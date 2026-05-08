@@ -1,0 +1,29 @@
+schema_version: 1
+id: CHG-2026-020-a91c-build-mvp-frontend-shell-over-headless-core
+title: Build MVP frontend shell over headless core
+status: planned
+type: feature
+size: large
+verification_status: pending
+context_bundles:
+  - project
+related_specs:
+  - specs/frontend-framework-evaluation.md
+  - specs/product-scope.md
+  - specs/capability-architecture.md
+related_decisions:
+  - decisions/defer-frontend-framework-selection.md
+  - decisions/capability-based-architecture.md
+related_changes:
+  - CHG-2026-019-8c74-evaluate-frontend-framework-after-foundation-validation
+  - CHG-2026-009-e6bd-prepare-mvp-community-beta-and-release-packaging
+depends_on:
+  - CHG-2026-019-8c74-evaluate-frontend-framework-after-foundation-validation
+informed_by: []
+supersedes: []
+superseded_by: []
+created_at: "2026-05-08"
+closed_at: null
+promotion_assessment:
+  status: pending
+  suggested_targets: []

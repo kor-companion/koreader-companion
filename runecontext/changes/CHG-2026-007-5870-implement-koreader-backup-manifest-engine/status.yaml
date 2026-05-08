@@ -12,7 +12,9 @@ related_specs:
 related_decisions:
   - decisions/defer-general-lua-parser.md
 related_changes: []
-depends_on: []
+depends_on:
+  - CHG-2026-002-966f-build-headless-capability-foundation
+  - CHG-2026-003-776b-implement-kobo-desktop-discovery-and-dry-run-preflight
 informed_by: []
 supersedes: []
 superseded_by: []

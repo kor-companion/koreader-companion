@@ -7,10 +7,16 @@ size: medium
 verification_status: pending
 context_bundles:
   - project
-related_specs: []
-related_decisions: []
+related_specs:
+  - specs/capability-architecture.md
+  - specs/kobo-desktop-mvp.md
+related_decisions:
+  - decisions/capability-based-architecture.md
+  - decisions/kobo-desktop-first.md
 related_changes: []
-depends_on: []
+depends_on:
+  - CHG-2026-002-966f-build-headless-capability-foundation
+  - CHG-2026-005-49bc-implement-safe-kobo-koreader-installation-workflow
 informed_by: []
 supersedes: []
 superseded_by: []

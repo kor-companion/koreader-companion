@@ -6,6 +6,8 @@ originating_changes:
   - CHG-2026-019-8c74-evaluate-frontend-framework-after-foundation-validation
 related_changes:
   - CHG-2026-002-966f-build-headless-capability-foundation
+  - CHG-2026-009-e6bd-prepare-mvp-community-beta-and-release-packaging
+  - CHG-2026-020-a91c-build-mvp-frontend-shell-over-headless-core
 ---
 
 # Defer Frontend Framework Selection

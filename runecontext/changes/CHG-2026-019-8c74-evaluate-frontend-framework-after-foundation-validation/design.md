@@ -49,3 +49,7 @@ The current recommendation is conditional:
 - Prefer Qt/QML or a native-core architecture if validated host access becomes the dominant maintenance burden.
 
 The final decision should be made in this change after the headless core and risky workflows exist.
+
+## Follow-Up Implementation
+
+The expected follow-up implementation change is `CHG-2026-020-a91c-build-mvp-frontend-shell-over-headless-core`. CHG-019 should either confirm that change is ready to implement with the selected framework or replace it with a more accurate implementation split before CHG-009 packaging begins.

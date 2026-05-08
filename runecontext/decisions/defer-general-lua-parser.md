@@ -7,6 +7,7 @@ originating_changes:
 related_changes:
   - CHG-2026-007-5870-implement-koreader-backup-manifest-engine
   - CHG-2026-008-b629-implement-selective-restore-and-backup-verification
+  - CHG-2026-016-7bd5-add-cross-device-sync-and-advanced-management-suite
 ---
 
 # Defer General Lua Parser

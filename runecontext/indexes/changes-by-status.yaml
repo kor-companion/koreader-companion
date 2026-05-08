@@ -94,9 +94,14 @@ statuses:
       path: changes/CHG-2026-018-d4f1-finalize-github-release-workflow-and-install-documentation/status.yaml
     - id: CHG-2026-019-8c74-evaluate-frontend-framework-after-foundation-validation
       title: Evaluate frontend framework after foundation validation
-      type: research
+      type: x-research
       size: medium
       path: changes/CHG-2026-019-8c74-evaluate-frontend-framework-after-foundation-validation/status.yaml
+    - id: CHG-2026-020-a91c-build-mvp-frontend-shell-over-headless-core
+      title: Build MVP frontend shell over headless core
+      type: feature
+      size: large
+      path: changes/CHG-2026-020-a91c-build-mvp-frontend-shell-over-headless-core/status.yaml
   implemented: []
   verified: []
   closed: []

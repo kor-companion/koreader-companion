@@ -19,13 +19,21 @@ The first development environment target is a reproducible dev shell.
 Requirements:
 
 - `nix develop` enters the standard contributor environment.
-- Core development, test, formatting, and packaging-support tools are available inside the shell.
+- Rust core development, test, formatting, linting, and packaging-support tools are available inside the shell.
 - Host/device diagnostic prerequisites are documented where Nix cannot fully abstract them.
 - Common development commands are documented.
 - Dependency versions are pinned by `flake.lock`.
 - nixpkgs unstable is acceptable when it is the practical source for current core, packaging, or diagnostic dependencies.
 - Host prerequisites that cannot be fully managed by Nix are documented.
 - Flutter, Dart, Qt, Tauri, Electron, or other frontend-specific dependencies should be added only after the frontend evaluation selects them.
+- Casual contributors should have a documented non-Nix path where practical, such as standard Rust toolchain commands, while Nix remains canonical for CI and release artifacts.
+
+Expected Rust tooling:
+
+- Rust toolchain for the headless core.
+- `cargo` commands for build, test, format, lint, and documentation generation.
+- SQLite development dependencies where needed by the selected Rust SQLite binding.
+- Cross-platform packaging helpers only when they are needed by implemented artifacts.
 
 The dev shell should be introduced before application implementation so every later MVP change can rely on the same environment.
 

@@ -129,12 +129,28 @@ Safety behavior should be shared across all target devices.
 
 ## Initial Technical Stack
 
-- Headless, testable core modules for host access, device targets, workflows, payload handling, persistence, and safety behavior.
-- SQLite through the selected core implementation stack for manifests, device records, and logs.
+- Rust headless core modules for host access, device targets, workflows, payload handling, persistence, and safety behavior.
+- SQLite through Rust bindings for manifests, device records, release metadata cache, backup records, and logs.
 - Diagnostic or command-line entry points as needed to validate risky workflows before production frontend work.
 - Nix development environment for reproducible local development and Linux build consistency.
 - GitHub REST API or equivalent release endpoint access for KOReader release fetching.
 - Production frontend framework to be selected later by `CHG-2026-019-8c74-evaluate-frontend-framework-after-foundation-validation`.
+
+Rust is the default headless-core language unless Kobo research or implementation evidence uncovers a strong reason to change course. This gives the project strong filesystem safety, explicit error handling, mature cross-platform packaging support, good SQLite options, and multiple future frontend integration paths without requiring the production UI to be Rust-based.
+
+## Module Model
+
+The core should be organized as shared logic plus host and device modules. Naming can evolve during implementation, but the architectural shape should remain stable:
+
+- Shared core: capability contracts, workflow state machines, dry-run plans, safety gates, path containment, operation logs, and user-facing domain events.
+- Persistence module: SQLite schemas, migrations, manifest storage, release metadata cache, device records, and operation logs.
+- Payload module: KOReader release lookup, artifact selection, checksum validation, staging, and extraction.
+- Host modules: Linux, macOS, Windows, and future Android or iOS host adapters that implement mount discovery, file access, permission checks, sync, and safe eject where supported.
+- Device modules: Kobo first, then PocketBook, Kindle-compatible unlocked states, Android/ADB devices, reMarkable/SSH targets, and future targets as separate implementations.
+- Diagnostic entrypoints: command-line or test harness surfaces that exercise workflows before production frontend work.
+- Frontend integration: a later UI consumes domain workflow state through the integration shape chosen after frontend evaluation, such as direct library calls, IPC, local service boundaries, or FFI.
+
+Shared workflows must depend on host and device capabilities rather than concrete platform names. Adding a new host or device should mean adding a module and tests, not rewriting install, backup, restore, safety, or release-selection logic.
 
 ## Expansion Rule
 
