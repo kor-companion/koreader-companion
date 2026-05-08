@@ -46,6 +46,18 @@ After the Kobo desktop MVP, the roadmap expands toward additional targets such a
 
 The repository is currently in the planning and architecture stage. The detailed project context, specs, decisions, and change roadmap live under `runecontext/`.
 
+The first implemented foundation is the Nix flake development environment. Contributor setup is available now; end-user installation guidance and signed release artifacts are planned for a later release change.
+
+## Development Environment
+
+- Contributor setup: `docs/development.md`
+- Contribution policy and DCO requirements: `CONTRIBUTING.md`
+- Enter the canonical dev shell: `nix develop`
+- Inspect flake outputs: `nix flake show`
+- Validate the current Nix setup: `nix flake check`
+
+Frontend-specific toolchains are intentionally deferred until the headless foundation and risky host/device workflows are validated.
+
 ## Contributing
 
 See `CONTRIBUTING.md`. DCO sign-off is required for commits (`git commit -s`).

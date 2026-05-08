@@ -60,9 +60,30 @@ project context, roadmap, and change tracking live under `runecontext/`.
 
 ## Development
 
-The planned canonical local workflow uses Nix once the development environment
-change is implemented. Until then, keep changes focused, documented, and
-aligned with the RuneContext roadmap and specs.
+The canonical contributor workflow uses the Nix flake dev shell that is already
+checked into this repository.
+
+Start with:
+
+```sh
+nix develop
+```
+
+See `docs/development.md` for the current local workflow, host prerequisites,
+flake validation commands, and the Rust-oriented commands that become active
+once the headless workspace lands.
+
+Important scope notes:
+
+- Nix is the primary path for contributor setup and future CI/release work.
+- A non-Nix Rust path may be practical for some contributors later, but the
+  repository docs treat it as secondary.
+- Optional `direnv` usage should stay limited to local shell activation. Do not
+  put secrets, signing material, or credentials in `.envrc`.
+- Frontend-specific toolchains are intentionally deferred until the roadmap's
+  frontend evaluation change.
+- End-user installation and signed release artifacts are not part of the current
+  contributor setup; those docs arrive in a later release-focused change.
 
 ## Submitting a Pull Request
 
