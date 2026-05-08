@@ -6,12 +6,6 @@ The MVP should front-load risky, non-frontend foundations before selecting or im
 
 ## MVP
 
-1. `CHG-2026-017-50a5-set-up-nix-local-development-and-release-artifacts` - Set up Nix local development and release artifacts.
-   Add the Nix flake dev shell first so all MVP implementation work shares a pinned local environment. Use a root-level `nix/` folder for reusable Nix modules, allow nixpkgs unstable where practical, and shape unsigned release artifact outputs so a later GitHub release workflow can sign and publish them without reorganizing the Nix files. Do not assume Flutter, Dart, or any production frontend framework yet.
-
-2. `CHG-2026-001-4104-define-korcompanion-product-foundation` - Define KORCompanion product foundation.
-   Establish the vision, target users, product promise, non-goals, adoption strategy, legal/trust boundaries, and durable product language before implementation begins.
-
 3. `CHG-2026-002-966f-build-headless-capability-foundation` - Build capability-based headless foundation.
    Create the non-frontend core, SQLite persistence, release service, device/host abstraction boundaries, workflow state model, and shared safety layer so later devices, mobile hosts, and frontend frameworks can be added without re-architecting the core.
 
@@ -71,3 +65,12 @@ The MVP should front-load risky, non-frontend foundations before selecting or im
 ## Removed Superseded Work
 
 The earlier empty Flutter-first foundation change directory, `CHG-2026-002-966f-build-capability-based-flutter-desktop-foundation`, was removed after being superseded by the headless core and frontend evaluation changes. The roadmap now tracks the active headless-first path only.
+
+# Completed Changes
+1. `CHG-2026-017-50a5-set-up-nix-local-development-and-release-artifacts` - Set up Nix local development and release artifacts.
+   Add the Nix flake dev shell first so all MVP implementation work shares a pinned local environment. Use a root-level `nix/` folder for reusable Nix modules, allow nixpkgs unstable where practical, and shape unsigned release artifact outputs so a later GitHub release workflow can sign and publish them without reorganizing the Nix files. Do not assume Flutter, Dart, or any production frontend framework yet.
+
+2. `CHG-2026-001-4104-define-korcompanion-product-foundation` - Define KORCompanion product foundation.
+   Establish the vision, target users, product promise, non-goals, adoption strategy, legal/trust boundaries, and durable product language before implementation begins.
+
+

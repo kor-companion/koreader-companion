@@ -1,7 +1,7 @@
 schema_version: 1
 id: CHG-2026-017-50a5-set-up-nix-local-development-and-release-artifacts
 title: Set up Nix local development and release artifacts
-status: planned
+status: implemented
 type: feature
 size: medium
 verification_status: pending

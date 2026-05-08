@@ -42,6 +42,15 @@ Validate the flake definition and checks:
 nix flake check
 ```
 
+Run the current fast repository verification flow from inside `nix develop`:
+
+```sh
+just ci-fast
+```
+
+`just ci-fast` is intentionally small right now and validates the real checked-in
+foundation that exists today.
+
 Format Nix files through the flake formatter:
 
 ```sh
@@ -57,6 +66,12 @@ nix flake update
 Review the resulting `flake.lock` changes before opening a pull request.
 
 ## Common Development Commands
+
+Current repository verification:
+
+```sh
+just ci-fast
+```
 
 These commands describe the expected local workflow once the Rust workspace
 lands. Until then, they are placeholders for the upcoming headless foundation.
@@ -77,7 +92,7 @@ Likely future validation commands for the headless foundation include:
 ```sh
 cargo build --workspace
 cargo test --workspace
-just ci
+just ci-fast
 ```
 
 Use the Nix commands above even before the Rust workspace exists so you can

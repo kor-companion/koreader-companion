@@ -1,7 +1,7 @@
 schema_version: 1
 id: CHG-2026-001-4104-define-korcompanion-product-foundation
 title: Define KORCompanion product foundation
-status: planned
+status: implemented
 type: project
 size: medium
 verification_status: pending

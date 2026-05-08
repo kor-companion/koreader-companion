@@ -1,10 +1,9 @@
 # KOReader Companion
 
-[![CI]()]()
 [![Status: alpha in progress](https://img.shields.io/badge/status-alpha%20in%20progress-orange)](runecontext/project/roadmap.md)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
-KOReader Companion is a planned companion application for KOReader users. The goal is to make KOReader installation, backup, restore, and device management safer, more repeatable, and more approachable across e-ink devices.
+KOReader Companion (`KORCompanion` in the project docs) is a planned desktop companion for people who want KOReader on supported e-readers without relying on fragile manual steps. The project aims to make KOReader installation, backup, restore, and device management safer, more repeatable, and easier to trust.
 
 ## Overview
 
@@ -17,7 +16,19 @@ The project is being designed as a capability-based companion platform:
 
 The MVP is intentionally narrow: Kobo target devices managed from desktop hosts.
 
+## Who It Is For
+
+The first users are not every e-reader owner.
+
+- Kobo owners who want KOReader but are nervous about manual install guides
+- Existing KOReader users who want safer backup and restore workflows
+- Community helpers who want a transparent tool they can recommend with confidence
+
+This repository is not yet a general-purpose e-reader suite, mobile app, or broad multi-device manager.
+
 ## MVP Direction
+
+Publicly, the MVP should be understood as a **Kobo desktop companion for KOReader installation and backup**.
 
 The first release is planned to focus on:
 
@@ -27,6 +38,17 @@ The first release is planned to focus on:
 - Operation logs, rollback guidance, and safe eject where supported
 - KOReader backup manifests and selective restore
 - A user-facing desktop frontend shell built on top of the validated headless core
+
+## Trust Boundaries And Non-Goals
+
+The project only becomes useful if users and community reviewers can trust its behavior.
+
+- No jailbreak or exploit automation
+- No bundled proprietary firmware, vendor binaries, or vendor-owned assets
+- No writes without an explicit user confirmation step
+- No installation without a dry-run preflight plan
+- No hidden "just trust us" automation for risky device operations
+- No claim that all e-readers or all KOReader workflows are supported in the MVP
 
 ## Roadmap Direction
 
@@ -46,15 +68,16 @@ After the Kobo desktop MVP, the roadmap expands toward additional targets such a
 
 The repository is currently in the planning and architecture stage. The detailed project context, specs, decisions, and change roadmap live under `runecontext/`.
 
-The first implemented foundation is the Nix flake development environment. Contributor setup is available now; end-user installation guidance and signed release artifacts are planned for a later release change.
+The first implemented foundation is the Nix flake development environment plus the initial repository verification surface. Contributor setup is available now; end-user installation guidance and signed release artifacts are planned for a later release change.
 
 ## Development Environment
 
 - Contributor setup: `docs/development.md`
 - Contribution policy and DCO requirements: `CONTRIBUTING.md`
 - Enter the canonical dev shell: `nix develop`
+- Run the fast repository check from inside the dev shell: `just ci-fast`
 - Inspect flake outputs: `nix flake show`
-- Validate the current Nix setup: `nix flake check`
+- Validate the current repo baseline directly: `nix flake check`
 
 Frontend-specific toolchains are intentionally deferred until the headless foundation and risky host/device workflows are validated.
 
