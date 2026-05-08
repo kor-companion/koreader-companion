@@ -48,7 +48,7 @@ just ci-fast
 ```
 
 `just ci-fast` is intentionally small right now and validates the real checked-in
-foundation that exists today.
+foundation that exists today, including the repository source-size policy check.
 
 Format Nix files through the flake formatter:
 
@@ -72,6 +72,23 @@ Current repository verification:
 just ci-fast
 ```
 
+## Source Size Policy
+
+Source files should stay reasonably small so host, device, and workflow logic can
+be reviewed safely.
+
+- `scripts/check-source-size.py` enforces a practical default limit of 320 lines
+  for checked-in Rust, Python, shell, Nix, and `Justfile` sources.
+- Generated output and build directories are ignored.
+- If a file must remain oversized temporarily, add it to the script allowlist
+  with a short reason so the exception is explicit and reviewable.
+
+Run the policy check directly with:
+
+```sh
+python3 scripts/check-source-size.py
+```
+
 Inside `nix develop`, contributors are expected to use commands such as:
 
 ```sh
@@ -93,8 +110,9 @@ cargo run -p kc-diagnostic -- probe /path/to/device-root
 just ci-fast
 ```
 
-`just ci-fast` now runs the flake checks plus `cargo test --workspace`, so the
-checked-in Rust workspace participates in the fast repository verification path.
+`just ci-fast` now runs the source-size check, flake checks, and
+`cargo test --workspace`, so the checked-in Rust workspace participates in the
+fast repository verification path.
 
 ## Non-Nix Rust Setup
 

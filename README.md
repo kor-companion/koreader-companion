@@ -70,12 +70,18 @@ The repository is still early, but it now includes the initial headless Rust wor
 
 Current implemented foundations include capability/domain contracts, payload and persistence crates, host and device seams, and a small `kc-diagnostic` CLI for pre-frontend reporting and manual target probing. End-user installation guidance and signed release artifacts are planned for later changes.
 
+The current host and device crates are organized into smaller modules, use
+address abstractions that can represent more than plain local paths, and keep
+host sync/eject reporting honest by exposing readiness/guidance without claiming
+automated OS behavior that does not exist yet.
+
 ## Development Environment
 
 - Contributor setup: `docs/development.md`
 - Contribution policy and DCO requirements: `CONTRIBUTING.md`
 - Enter the canonical dev shell: `nix develop`
 - Run the fast repository check from inside the dev shell: `just ci-fast`
+- Enforce the repository source-size policy directly: `python3 scripts/check-source-size.py`
 - Inspect flake outputs: `nix flake show`
 - Validate the current repo baseline directly: `nix flake check`
 

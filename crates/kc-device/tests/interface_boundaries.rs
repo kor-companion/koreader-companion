@@ -2,7 +2,8 @@ use std::path::PathBuf;
 
 use kc_device::{assess_host_mounts, InMemoryDeviceProbe, KoboTarget, StaticDeviceTarget};
 use kc_domain::{
-    CapabilityProfile, DeviceDescriptor, DeviceKind, MountPoint, ReadinessReport, SupportLevel,
+    Address, CapabilityProfile, DeviceDescriptor, DeviceKind, MountPoint, ReadinessReport,
+    SupportLevel, TransportKind,
 };
 use kc_host::{FilesystemHost, HostAdapterDescriptor, InMemoryHostFilesystem};
 
@@ -70,4 +71,11 @@ fn host_and_device_adapters_are_exercised_through_interfaces() {
         future_assessment.install_root,
         PathBuf::from("/mnt/future-reader/.adds/app")
     );
+    assert!(matches!(
+        future_assessment.install_target,
+        Address::ScopedPath {
+            transport: TransportKind::UsbMassStorage,
+            ..
+        }
+    ));
 }

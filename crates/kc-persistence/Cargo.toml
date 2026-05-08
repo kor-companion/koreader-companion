@@ -10,6 +10,6 @@ name = "kc_persistence"
 path = "src/lib.rs"
 
 [dependencies]
+base64 = "0.22"
 kc-domain = { path = "../kc-domain" }
-kc-payload = { path = "../kc-payload" }
 rusqlite = { version = "0.32", features = ["bundled"] }

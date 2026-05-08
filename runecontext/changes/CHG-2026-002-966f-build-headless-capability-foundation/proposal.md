@@ -11,6 +11,10 @@ Build a Rust headless core that can produce dry-run plans, execute guarded workf
 
 The core should be organized around shared workflow logic plus host and device modules. Linux, macOS, Windows, and later mobile hosts should implement host access interfaces. Kobo and later device families should implement device target interfaces. Install, backup, restore, release selection, logging, and safety behavior should remain shared.
 
+Implementation now includes a modular Rust workspace with focused crates for domain contracts, payload handling, SQLite persistence, host access, device targets, and a diagnostic CLI. The core now uses address abstractions that can represent local filesystem paths, scoped transport-relative paths, remote endpoints, and logical identifiers so future ADB, SSH, and mobile-host work does not have to be forced through plain local paths.
+
+This change also establishes an explicit repository source-size policy so the workspace stays split into logical modules and does not regress toward monolithic multi-thousand-line implementation files.
+
 Do not add Flutter, Material UI, Qt, Electron, Tauri, or other frontend framework commitments in this change.
 
 ## Why Now
@@ -30,3 +34,5 @@ The risky foundational behavior should be proven before frontend implementation 
 
 ## Impact
 This change makes the MVP less dependent on early UI-framework decisions and gives later frontend evaluation real implementation evidence.
+
+It also establishes the capability and module boundaries that later host/device-specific changes can extend without rewriting shared workflow, persistence, payload-selection, or safety logic.
