@@ -58,11 +58,54 @@ Maintainers should:
 The repository is currently in the planning and architecture stage. The main
 project context, roadmap, and change tracking live under `runecontext/`.
 
+The public product position is intentionally narrow right now: a Kobo desktop
+companion for safer KOReader installation, backup, and restore workflows.
+
+## Product And Trust Boundaries
+
+Please preserve the product boundaries defined in the project docs when making
+changes:
+
+- Keep the public product position aligned with the current Kobo desktop MVP.
+- Do not introduce jailbreak, exploit, or locked-state bypass automation.
+- Do not bundle proprietary firmware, vendor binaries, or vendor-owned assets.
+- Do not normalize hidden or automatic risky writes.
+
+The canonical product/trust references are:
+
+- `README.md` for public project positioning and high-level trust boundaries.
+- `runecontext/project/vision.md` for audience, promise, and positioning.
+- `runecontext/project/legal-trust.md` for hard boundaries and trust model.
+- `runecontext/specs/product-scope.md` for MVP scope and out-of-scope lines.
+
 ## Development
 
-The planned canonical local workflow uses Nix once the development environment
-change is implemented. Until then, keep changes focused, documented, and
-aligned with the RuneContext roadmap and specs.
+The canonical contributor workflow uses the Nix flake dev shell that is already
+checked into this repository.
+
+Start with:
+
+```sh
+nix develop
+just ci-fast
+```
+
+See `docs/development.md` for the current local workflow, host prerequisites,
+flake validation commands, the current fast verification command, and the
+Rust-oriented commands that become active
+once the headless workspace lands.
+
+Important scope notes:
+
+- Nix is the primary path for contributor setup and future CI/release work.
+- A non-Nix Rust path may be practical for some contributors later, but the
+  repository docs treat it as secondary.
+- Optional `direnv` usage should stay limited to local shell activation. Do not
+  put secrets, signing material, or credentials in `.envrc`.
+- Frontend-specific toolchains are intentionally deferred until the roadmap's
+  frontend evaluation change.
+- End-user installation and signed release artifacts are not part of the current
+  contributor setup; those docs arrive in a later release-focused change.
 
 ## Submitting a Pull Request
 
