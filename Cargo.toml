@@ -1,0 +1,16 @@
+[workspace]
+members = [
+    "crates/kc-device",
+    "crates/kc-diagnostic",
+    "crates/kc-domain",
+    "crates/kc-host",
+    "crates/kc-payload",
+    "crates/kc-persistence",
+]
+resolver = "2"
+
+[workspace.package]
+edition = "2021"
+license = "Apache-2.0"
+publish = false
+version = "0.1.0"

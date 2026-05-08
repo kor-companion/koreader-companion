@@ -9,9 +9,8 @@ instructions are planned for a later release change.
 ## Current Status
 
 - The Nix flake and dev shell are available now.
-- The Rust headless workspace is planned in
-  `CHG-2026-002-966f-build-headless-capability-foundation` and does not exist
-  yet.
+- The Rust headless workspace now includes foundational domain, payload,
+  persistence, host, device, and diagnostic CLI crates.
 - Frontend-specific toolchains are intentionally deferred until the roadmap's
   frontend evaluation work selects one.
 
@@ -73,9 +72,6 @@ Current repository verification:
 just ci-fast
 ```
 
-These commands describe the expected local workflow once the Rust workspace
-lands. Until then, they are placeholders for the upcoming headless foundation.
-
 Inside `nix develop`, contributors are expected to use commands such as:
 
 ```sh
@@ -87,16 +83,18 @@ cargo audit
 cargo deny check
 ```
 
-Likely future validation commands for the headless foundation include:
+Current foundation-oriented commands include:
 
 ```sh
 cargo build --workspace
 cargo test --workspace
+cargo run -p kc-diagnostic -- foundation
+cargo run -p kc-diagnostic -- probe /path/to/device-root
 just ci-fast
 ```
 
-Use the Nix commands above even before the Rust workspace exists so you can
-format Nix files and verify the development environment itself.
+`just ci-fast` now runs the flake checks plus `cargo test --workspace`, so the
+checked-in Rust workspace participates in the fast repository verification path.
 
 ## Non-Nix Rust Setup
 

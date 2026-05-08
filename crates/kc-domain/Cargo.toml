@@ -1,0 +1,10 @@
+[package]
+name = "kc-domain"
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+version.workspace = true
+
+[lib]
+name = "kc_domain"
+path = "src/lib.rs"

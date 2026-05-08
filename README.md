@@ -66,9 +66,9 @@ After the Kobo desktop MVP, the roadmap expands toward additional targets such a
 
 ## Status
 
-The repository is currently in the planning and architecture stage. The detailed project context, specs, decisions, and change roadmap live under `runecontext/`.
+The repository is still early, but it now includes the initial headless Rust workspace foundation alongside the Nix-based development environment. The detailed project context, specs, decisions, and change roadmap live under `runecontext/`.
 
-The first implemented foundation is the Nix flake development environment plus the initial repository verification surface. Contributor setup is available now; end-user installation guidance and signed release artifacts are planned for a later release change.
+Current implemented foundations include capability/domain contracts, payload and persistence crates, host and device seams, and a small `kc-diagnostic` CLI for pre-frontend reporting and manual target probing. End-user installation guidance and signed release artifacts are planned for later changes.
 
 ## Development Environment
 

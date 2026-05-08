@@ -5,5 +5,6 @@ default:
 
 ci-fast:
 	nix flake check
+	cargo test --workspace
 
 ci: ci-fast
