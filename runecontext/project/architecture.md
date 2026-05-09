@@ -150,6 +150,11 @@ The core should be organized as shared logic plus host and device modules. Namin
 - Diagnostic entrypoints: command-line or test harness surfaces that exercise workflows before production frontend work.
 - Frontend integration: a later UI consumes domain workflow state through the integration shape chosen after frontend evaluation, such as direct library calls, IPC, local service boundaries, or FFI.
 
+Implementation files should stay reasonably small and be split into logical
+submodules before they become difficult to review. Repository verification now
+includes an explicit source-size check with a checked-in allowlist/reason
+mechanism for temporary exceptions.
+
 Shared workflows must depend on host and device capabilities rather than concrete platform names. Adding a new host or device should mean adding a module and tests, not rewriting install, backup, restore, safety, or release-selection logic.
 
 ## Expansion Rule

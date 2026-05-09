@@ -11,7 +11,9 @@ bundles:
             kind: glob
         excludes: []
       standards:
-        includes: []
+        includes:
+          - pattern: standards/**
+            kind: glob
         excludes: []
       specs:
         includes:

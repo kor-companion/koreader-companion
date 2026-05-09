@@ -1,0 +1,15 @@
+[package]
+name = "kc-persistence"
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+version.workspace = true
+
+[lib]
+name = "kc_persistence"
+path = "src/lib.rs"
+
+[dependencies]
+base64 = "0.22"
+kc-domain = { path = "../kc-domain" }
+rusqlite = { version = "0.32", features = ["bundled"] }

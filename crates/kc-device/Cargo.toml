@@ -1,0 +1,16 @@
+[package]
+name = "kc-device"
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+version.workspace = true
+
+[lib]
+name = "kc_device"
+path = "src/lib.rs"
+
+[dependencies]
+kc-domain = { path = "../kc-domain" }
+
+[dev-dependencies]
+kc-host = { path = "../kc-host" }

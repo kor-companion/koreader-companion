@@ -13,6 +13,7 @@ let
     nixfmt
     openssl
     pkg-config
+    python3
     rust-analyzer
     rustc
     rustfmt

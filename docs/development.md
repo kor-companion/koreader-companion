@@ -9,9 +9,8 @@ instructions are planned for a later release change.
 ## Current Status
 
 - The Nix flake and dev shell are available now.
-- The Rust headless workspace is planned in
-  `CHG-2026-002-966f-build-headless-capability-foundation` and does not exist
-  yet.
+- The Rust headless workspace now includes foundational domain, payload,
+  persistence, host, device, and diagnostic CLI crates.
 - Frontend-specific toolchains are intentionally deferred until the roadmap's
   frontend evaluation work selects one.
 
@@ -42,6 +41,16 @@ Validate the flake definition and checks:
 nix flake check
 ```
 
+`nix flake check` is still useful because it validates the flake interface and
+multi-system output wiring, but with the current flake layout it may print
+`running 0 flake checks...` on a single host even when the repo is healthy.
+
+Run the current system's concrete flake check derivations with:
+
+```sh
+just nix-checks
+```
+
 Run the current fast repository verification flow from inside `nix develop`:
 
 ```sh
@@ -49,7 +58,8 @@ just ci-fast
 ```
 
 `just ci-fast` is intentionally small right now and validates the real checked-in
-foundation that exists today.
+foundation that exists today, including the repository source-size policy,
+explicit current-system Nix checks, and the Rust workspace tests.
 
 Format Nix files through the flake formatter:
 
@@ -73,8 +83,28 @@ Current repository verification:
 just ci-fast
 ```
 
-These commands describe the expected local workflow once the Rust workspace
-lands. Until then, they are placeholders for the upcoming headless foundation.
+If you only want the Nix portion of that flow, run:
+
+```sh
+just nix-checks
+```
+
+## Source Size Policy
+
+Source files should stay reasonably small so host, device, and workflow logic can
+be reviewed safely.
+
+- `scripts/check-source-size.py` enforces a practical default limit of 320 lines
+  for checked-in Rust, Python, shell, Nix, and `Justfile` sources.
+- Generated output and build directories are ignored.
+- If a file must remain oversized temporarily, add it to the script allowlist
+  with a short reason so the exception is explicit and reviewable.
+
+Run the policy check directly with:
+
+```sh
+python3 scripts/check-source-size.py
+```
 
 Inside `nix develop`, contributors are expected to use commands such as:
 
@@ -87,16 +117,23 @@ cargo audit
 cargo deny check
 ```
 
-Likely future validation commands for the headless foundation include:
+Current foundation-oriented commands include:
 
 ```sh
 cargo build --workspace
 cargo test --workspace
+cargo run -p kc-diagnostic -- foundation
+cargo run -p kc-diagnostic -- probe /path/to/device-root
+just nix-checks
 just ci-fast
 ```
 
-Use the Nix commands above even before the Rust workspace exists so you can
-format Nix files and verify the development environment itself.
+`just ci-fast` now runs the source-size check, `nix flake check`, explicit
+current-system flake check builds, and `cargo test --workspace`, so the
+checked-in Rust workspace participates in the fast repository verification path.
+
+For repeatable headless-foundation spot checks, use the short matrix in
+`docs/manual-qa.md`.
 
 ## Non-Nix Rust Setup
 

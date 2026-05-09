@@ -3,12 +3,14 @@ indexes:
   changes_by_status: indexes/changes-by-status.yaml
   bundles: indexes/bundles.yaml
 counts:
-  standards: 0
+  standards: 2
   bundles: 1
   changes: 20
   specs: 7
   decisions: 7
-standards: []
+standards:
+  - standards/architecture/transport-aware-addressing.md
+  - standards/development/source-size-policy.md
 bundles:
   - project
 changes:

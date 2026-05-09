@@ -7,8 +7,20 @@ let
   packages = import ./packages { inherit pkgs; };
   releaseMetadataJson = pkgs.writeText "release-metadata.json" (builtins.toJSON metadata);
   unsignedReleaseArtifact = packages."unsigned-release-artifact";
+  sourceSizeCheck = pkgs.runCommand "source-size-check"
+    {
+      nativeBuildInputs = [ pkgs.python3 ];
+    }
+    ''
+      cd ${../.}
+      KC_SOURCE_SIZE_ROOT=${../.} python3 ${../scripts/check-source-size.py}
+      mkdir -p "$out"
+      touch "$out/verified"
+    '';
 in
 {
+  "source-size" = sourceSizeCheck;
+
   "release-metadata" = pkgs.runCommand "release-metadata-check"
     { }
     ''
