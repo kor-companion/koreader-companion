@@ -65,7 +65,16 @@ impl SqliteStore {
             )
             .optional()?;
 
-        let Some((manifest_id, device_id, created_at_unix, profile, app_version, schema_version, source_root)) = manifest else {
+        let Some((
+            manifest_id,
+            device_id,
+            created_at_unix,
+            profile,
+            app_version,
+            schema_version,
+            source_root,
+        )) = manifest
+        else {
             return Ok(None);
         };
         let source_root = parse_address("backup_manifest.source_root", &source_root)?;

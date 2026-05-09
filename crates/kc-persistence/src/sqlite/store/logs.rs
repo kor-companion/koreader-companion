@@ -59,22 +59,19 @@ impl SqliteStore {
                     END >= ?2)
              ORDER BY id ASC",
         )?;
-        let rows = stmt.query_map(
-            params![execution_id, minimum_rank],
-            |row| {
-                Ok((
-                    row.get::<_, i64>(0)?,
-                    row.get::<_, i64>(1)?,
-                    row.get::<_, i64>(2)?,
-                    row.get::<_, i64>(3)?,
-                    row.get::<_, String>(4)?,
-                    row.get::<_, String>(5)?,
-                    row.get::<_, String>(6)?,
-                    row.get::<_, String>(7)?,
-                    row.get::<_, i64>(8)?,
-                ))
-            },
-        )?;
+        let rows = stmt.query_map(params![execution_id, minimum_rank], |row| {
+            Ok((
+                row.get::<_, i64>(0)?,
+                row.get::<_, i64>(1)?,
+                row.get::<_, i64>(2)?,
+                row.get::<_, i64>(3)?,
+                row.get::<_, String>(4)?,
+                row.get::<_, String>(5)?,
+                row.get::<_, String>(6)?,
+                row.get::<_, String>(7)?,
+                row.get::<_, i64>(8)?,
+            ))
+        })?;
 
         let mut logs = Vec::new();
         for row in rows {

@@ -11,9 +11,7 @@ MAX_LINES = 320
 INCLUDED_SUFFIXES = {".rs", ".py", ".sh", ".nix"}
 INCLUDED_NAMES = {"Justfile"}
 SKIP_PARTS = {"target", ".git", ".direnv", "result"}
-ALLOWLIST = {
-    "crates/kc-payload/src/lib.rs": "payload crate will be split in a later grouping",
-}
+ALLOWLIST = {}
 
 
 def should_check(path: Path) -> bool:
