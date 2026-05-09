@@ -165,7 +165,7 @@ fn normalize_manual_probe_root(path: &Path) -> Result<PathBuf, kc_domain::Domain
     for component in candidate.components() {
         match component {
             Component::Prefix(prefix) => normalized.push(prefix.as_os_str()),
-            Component::RootDir => normalized.push(Path::new("/")),
+            Component::RootDir => normalized.push(component.as_os_str()),
             Component::CurDir => {}
             Component::Normal(part) => normalized.push(part),
             Component::ParentDir => {
@@ -200,5 +200,19 @@ mod tests {
         assert!(lines.iter().any(|line| {
             line.contains("Kobo USB mass storage target") && line.contains("Supported")
         }));
+    }
+
+    #[test]
+    fn manual_probe_root_normalization_preserves_absolute_roots() {
+        let absolute = if cfg!(windows) {
+            Path::new(r"C:\probe\root")
+        } else {
+            Path::new("/probe/root")
+        };
+
+        let normalized = normalize_manual_probe_root(absolute).unwrap();
+
+        assert!(normalized.is_absolute());
+        assert_eq!(normalized, absolute);
     }
 }
