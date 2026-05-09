@@ -130,6 +130,20 @@ fn filtered_log_queries_ignore_invalid_rows_outside_requested_execution() {
 }
 
 #[test]
+fn log_queries_reject_execution_id_overflow() {
+    let store = SqliteStore::in_memory().unwrap();
+
+    let error = store
+        .list_logs_internal(&OperationLogQuery {
+            execution_id: Some(ExecutionId::new(u64::MAX)),
+            minimum_severity: None,
+        })
+        .unwrap_err();
+
+    assert!(matches!(error, PersistenceError::InvalidNumber(i64::MAX)));
+}
+
+#[test]
 fn opening_future_schema_versions_fails_closed() {
     let unique = SystemTime::now()
         .duration_since(UNIX_EPOCH)

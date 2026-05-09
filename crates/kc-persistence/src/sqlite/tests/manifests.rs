@@ -53,6 +53,28 @@ fn rejects_invalid_persisted_manifest_relative_paths_on_load() {
 }
 
 #[test]
+fn rejects_invalid_persisted_manifest_source_root_encoding_on_load() {
+    let mut store = SqliteStore::in_memory().unwrap();
+    ManifestRepository::save_manifest(&mut store, &sample_manifest()).unwrap();
+    store
+        .connection()
+        .execute(
+            "UPDATE backup_manifests SET source_root = 'local|@@@' WHERE manifest_id = 'backup-1'",
+            [],
+        )
+        .unwrap();
+
+    let error = store.load_manifest_internal("backup-1").unwrap_err();
+    assert!(matches!(
+        error,
+        PersistenceError::InvalidEncoding {
+            field: "backup_manifest.source_root",
+            ..
+        }
+    ));
+}
+
+#[test]
 fn manifest_round_trips_scoped_source_roots() {
     let mut store = SqliteStore::in_memory().unwrap();
     let manifest = kc_domain::BackupManifestRecord {

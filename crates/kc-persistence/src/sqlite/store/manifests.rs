@@ -52,28 +52,32 @@ impl SqliteStore {
                  FROM backup_manifests WHERE manifest_id = ?1",
                 [id],
                 |row| {
-                    let source_root = row.get::<_, String>(6)?;
-                    Ok(BackupManifestRecord {
-                        manifest_id: row.get(0)?,
-                        device_id: row.get(1)?,
-                        created_at_unix: row.get(2)?,
-                        profile: row.get(3)?,
-                        app_version: row.get(4)?,
-                        schema_version: row.get(5)?,
-                        source_root: parse_address("backup_manifest.source_root", &source_root)
-                            .map_err(|error| rusqlite::Error::FromSqlConversionFailure(
-                                6,
-                                rusqlite::types::Type::Text,
-                                Box::new(error),
-                            ))?,
-                        entries: Vec::new(),
-                    })
+                    Ok((
+                        row.get::<_, String>(0)?,
+                        row.get::<_, String>(1)?,
+                        row.get::<_, i64>(2)?,
+                        row.get::<_, String>(3)?,
+                        row.get::<_, String>(4)?,
+                        row.get::<_, i64>(5)?,
+                        row.get::<_, String>(6)?,
+                    ))
                 },
             )
             .optional()?;
 
-        let Some(mut manifest) = manifest else {
+        let Some((manifest_id, device_id, created_at_unix, profile, app_version, schema_version, source_root)) = manifest else {
             return Ok(None);
+        };
+        let source_root = parse_address("backup_manifest.source_root", &source_root)?;
+        let mut manifest = BackupManifestRecord {
+            manifest_id,
+            device_id,
+            created_at_unix,
+            profile,
+            app_version,
+            schema_version,
+            source_root,
+            entries: Vec::new(),
         };
         validate_source_root_address(&manifest.source_root)?;
 

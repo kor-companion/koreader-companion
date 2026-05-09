@@ -40,6 +40,10 @@ impl SqliteStore {
         query: &OperationLogQuery,
     ) -> Result<Vec<StoredOperationLog>, PersistenceError> {
         let minimum_rank = query.minimum_severity.map(severity_rank);
+        let execution_id = query
+            .execution_id
+            .map(|id| super::to_i64(id.value()))
+            .transpose()?;
 
         let mut stmt = self.conn.prepare(
             "SELECT plan_id, plan_item_id, execution_id, operation_id,
@@ -56,7 +60,7 @@ impl SqliteStore {
              ORDER BY id ASC",
         )?;
         let rows = stmt.query_map(
-            params![query.execution_id.map(|id| id.value() as i64), minimum_rank],
+            params![execution_id, minimum_rank],
             |row| {
                 Ok((
                     row.get::<_, i64>(0)?,

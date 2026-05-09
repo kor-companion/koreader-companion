@@ -74,12 +74,14 @@ pub fn bootstrap(conn: &Connection) -> Result<(), PersistenceError> {
              download_url TEXT NOT NULL,
              size_bytes INTEGER NOT NULL,
              content_type TEXT,
-              checksum_hex TEXT,
-              FOREIGN KEY(cache_key) REFERENCES release_metadata_cache(cache_key) ON DELETE CASCADE
-          );
-          INSERT OR IGNORE INTO schema_migrations (version, applied_at)
-          VALUES (1, strftime('%s','now'));
-          COMMIT;",
+             checksum_hex TEXT,
+             FOREIGN KEY(cache_key) REFERENCES release_metadata_cache(cache_key) ON DELETE CASCADE
+         );
+         COMMIT;",
+    )?;
+    conn.execute(
+        "INSERT OR IGNORE INTO schema_migrations (version, applied_at) VALUES (?1, strftime('%s','now'))",
+        [SCHEMA_VERSION],
     )?;
     Ok(())
 }
