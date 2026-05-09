@@ -7,11 +7,6 @@ statuses:
       type: project
       size: medium
       path: changes/CHG-2026-001-4104-define-korcompanion-product-foundation/status.yaml
-    - id: CHG-2026-002-966f-build-headless-capability-foundation
-      title: Build capability-based headless foundation
-      type: feature
-      size: large
-      path: changes/CHG-2026-002-966f-build-headless-capability-foundation/status.yaml
     - id: CHG-2026-003-776b-implement-kobo-desktop-discovery-and-dry-run-preflight
       title: Implement Kobo desktop discovery and dry-run preflight
       type: feature
@@ -102,7 +97,12 @@ statuses:
       type: feature
       size: large
       path: changes/CHG-2026-020-a91c-build-mvp-frontend-shell-over-headless-core/status.yaml
-  implemented: []
+  implemented:
+    - id: CHG-2026-002-966f-build-headless-capability-foundation
+      title: Build capability-based headless foundation
+      type: feature
+      size: large
+      path: changes/CHG-2026-002-966f-build-headless-capability-foundation/status.yaml
   verified: []
   closed: []
   superseded: []

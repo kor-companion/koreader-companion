@@ -66,7 +66,7 @@ After the Kobo desktop MVP, the roadmap expands toward additional targets such a
 
 ## Status
 
-The repository is still early, but it now includes the initial headless Rust workspace foundation alongside the Nix-based development environment. The detailed project context, specs, decisions, and change roadmap live under `runecontext/`.
+The repository is still early, but it now includes the headless Rust workspace foundation alongside the Nix-based development environment. The detailed project context, specs, decisions, and change roadmap live under `runecontext/`.
 
 Current implemented foundations include capability/domain contracts, payload and persistence crates, host and device seams, and a small `kc-diagnostic` CLI for pre-frontend reporting and manual target probing. End-user installation guidance and signed release artifacts are planned for later changes.
 
@@ -84,6 +84,8 @@ automated OS behavior that does not exist yet.
 - Run the fast repository check from inside the dev shell: `just ci-fast`
 - Run the explicit current-system Nix verification flow: `just nix-checks`
 - Enforce the repository source-size policy directly: `python3 scripts/check-source-size.py`
+- Print the current foundation report: `cargo run -p kc-diagnostic -- foundation`
+- Probe a candidate device root manually: `cargo run -p kc-diagnostic -- probe /path/to/device-root`
 - Inspect flake outputs: `nix flake show`
 - Validate flake wiring and output evaluation directly: `nix flake check`
 

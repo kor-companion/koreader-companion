@@ -21,7 +21,6 @@ Do not add Flutter, Material UI, Qt, Electron, Tauri, or other frontend framewor
 The risky foundational behavior should be proven before frontend implementation begins. This keeps framework selection evidence-driven and prevents frontend assumptions from shaping the safety-critical core.
 
 ## Assumptions
-- No selectable standards are defined in the project yet; the Applicable Standards section is rendered as N/A.
 - Rust is the default headless-core language unless Kobo implementation evidence uncovers a strong reason to change course.
 - Initial validation can be performed through tests, fixtures, command-line entry points, or small diagnostic tools without a production frontend.
 - Frontend framework selection is deferred to `CHG-2026-019-8c74-evaluate-frontend-framework-after-foundation-validation`.
