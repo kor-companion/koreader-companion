@@ -13,7 +13,7 @@ let
     }
     ''
       cd ${../.}
-      python3 ${../scripts/check-source-size.py}
+      KC_SOURCE_SIZE_ROOT=${../.} python3 ${../scripts/check-source-size.py}
       mkdir -p "$out"
       touch "$out/verified"
     '';

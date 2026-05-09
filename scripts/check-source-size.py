@@ -3,17 +3,16 @@
 from __future__ import annotations
 
 import sys
+import os
 from pathlib import Path
 
-ROOT = Path.cwd().resolve()
+ROOT = Path(os.environ.get("KC_SOURCE_SIZE_ROOT", Path(__file__).resolve().parent.parent)).resolve()
 MAX_LINES = 320
 INCLUDED_SUFFIXES = {".rs", ".py", ".sh", ".nix"}
 INCLUDED_NAMES = {"Justfile"}
 SKIP_PARTS = {"target", ".git", ".direnv", "result"}
 ALLOWLIST = {
     "crates/kc-payload/src/lib.rs": "payload crate will be split in a later grouping",
-    "crates/kc-persistence/src/sqlite/store.rs": "persistence sqlite store remains pre-existing and will be split in a later grouping",
-    "crates/kc-persistence/src/sqlite/tests.rs": "persistence sqlite tests remain pre-existing and will be split with store coverage later",
 }
 
 
@@ -29,6 +28,10 @@ def line_count(path: Path) -> int:
 
 
 def main() -> int:
+    if not (ROOT / "Cargo.toml").exists() or not (ROOT / "Justfile").exists():
+        print(f"source file size check expected repo root at {ROOT}", file=sys.stderr)
+        return 1
+
     failures: list[tuple[str, int, str | None]] = []
 
     for path in sorted(ROOT.rglob("*")):

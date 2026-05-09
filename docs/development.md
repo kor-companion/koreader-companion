@@ -41,6 +41,16 @@ Validate the flake definition and checks:
 nix flake check
 ```
 
+`nix flake check` is still useful because it validates the flake interface and
+multi-system output wiring, but with the current flake layout it may print
+`running 0 flake checks...` on a single host even when the repo is healthy.
+
+Run the current system's concrete flake check derivations with:
+
+```sh
+just nix-checks
+```
+
 Run the current fast repository verification flow from inside `nix develop`:
 
 ```sh
@@ -48,7 +58,8 @@ just ci-fast
 ```
 
 `just ci-fast` is intentionally small right now and validates the real checked-in
-foundation that exists today, including the repository source-size policy check.
+foundation that exists today, including the repository source-size policy,
+explicit current-system Nix checks, and the Rust workspace tests.
 
 Format Nix files through the flake formatter:
 
@@ -70,6 +81,12 @@ Current repository verification:
 
 ```sh
 just ci-fast
+```
+
+If you only want the Nix portion of that flow, run:
+
+```sh
+just nix-checks
 ```
 
 ## Source Size Policy
@@ -107,12 +124,16 @@ cargo build --workspace
 cargo test --workspace
 cargo run -p kc-diagnostic -- foundation
 cargo run -p kc-diagnostic -- probe /path/to/device-root
+just nix-checks
 just ci-fast
 ```
 
-`just ci-fast` now runs the source-size check, flake checks, and
-`cargo test --workspace`, so the checked-in Rust workspace participates in the
-fast repository verification path.
+`just ci-fast` now runs the source-size check, `nix flake check`, explicit
+current-system flake check builds, and `cargo test --workspace`, so the
+checked-in Rust workspace participates in the fast repository verification path.
+
+For repeatable headless-foundation spot checks, use the short matrix in
+`docs/manual-qa.md`.
 
 ## Non-Nix Rust Setup
 

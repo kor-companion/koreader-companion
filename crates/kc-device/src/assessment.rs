@@ -9,10 +9,10 @@ pub struct DeviceAssessment {
     pub mount: MountPoint,
     pub descriptor: DeviceDescriptor,
     pub readiness: ReadinessReport,
-    pub install_target: Address,
-    pub backup_target: Address,
-    pub install_root: PathBuf,
-    pub backup_root: PathBuf,
+    pub install_target: Option<Address>,
+    pub backup_target: Option<Address>,
+    pub install_root: Option<PathBuf>,
+    pub backup_root: Option<PathBuf>,
 }
 
 pub fn assess_host_mounts(
@@ -23,14 +23,26 @@ pub fn assess_host_mounts(
 
     for mount in host.discover_mounts()? {
         for target in targets {
+            let readiness = target.readiness(&mount)?;
+            let (install_target, backup_target, install_root, backup_root) = if readiness.ready {
+                (
+                    Some(target.install_target(&mount)?),
+                    Some(target.backup_target(&mount)?),
+                    Some(target.install_root(&mount)?),
+                    Some(target.backup_root(&mount)?),
+                )
+            } else {
+                (None, None, None, None)
+            };
+
             assessments.push(DeviceAssessment {
                 mount: mount.clone(),
                 descriptor: target.descriptor().clone(),
-                readiness: target.readiness(&mount)?,
-                install_target: target.install_target(&mount)?,
-                backup_target: target.backup_target(&mount)?,
-                install_root: target.install_root(&mount)?,
-                backup_root: target.backup_root(&mount)?,
+                readiness,
+                install_target,
+                backup_target,
+                install_root,
+                backup_root,
             });
         }
     }

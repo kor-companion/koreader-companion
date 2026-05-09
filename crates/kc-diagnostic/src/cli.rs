@@ -28,4 +28,12 @@ mod tests {
             Command::Probe { .. }
         ));
     }
+
+    #[test]
+    fn parser_rejects_invalid_usage() {
+        assert!(matches!(
+            parse_command(&["probe".to_string()]),
+            Err(DomainError::Validation(message)) if message == "invalid diagnostic command usage"
+        ));
+    }
 }

@@ -78,12 +78,14 @@ automated OS behavior that does not exist yet.
 ## Development Environment
 
 - Contributor setup: `docs/development.md`
+- Manual QA matrix for the current headless foundation: `docs/manual-qa.md`
 - Contribution policy and DCO requirements: `CONTRIBUTING.md`
 - Enter the canonical dev shell: `nix develop`
 - Run the fast repository check from inside the dev shell: `just ci-fast`
+- Run the explicit current-system Nix verification flow: `just nix-checks`
 - Enforce the repository source-size policy directly: `python3 scripts/check-source-size.py`
 - Inspect flake outputs: `nix flake show`
-- Validate the current repo baseline directly: `nix flake check`
+- Validate flake wiring and output evaluation directly: `nix flake check`
 
 Frontend-specific toolchains are intentionally deferred until the headless foundation and risky host/device workflows are validated.
 

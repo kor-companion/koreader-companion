@@ -14,6 +14,7 @@ pub enum PersistenceError {
     InvalidAddress { field: &'static str, value: String },
     InvalidTarget { field: &'static str, value: String },
     InvalidPath { field: &'static str, value: String },
+    UnsupportedSchemaVersion { found: i64, supported: i64 },
 }
 
 impl fmt::Display for PersistenceError {
@@ -31,6 +32,10 @@ impl fmt::Display for PersistenceError {
             }
             Self::InvalidTarget { field, value } => write!(f, "invalid {field} target: {value}"),
             Self::InvalidPath { field, value } => write!(f, "invalid {field} path: {value}"),
+            Self::UnsupportedSchemaVersion { found, supported } => write!(
+                f,
+                "unsupported schema version {found}; this build supports up to {supported}"
+            ),
         }
     }
 }

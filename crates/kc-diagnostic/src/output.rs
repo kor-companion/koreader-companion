@@ -1,7 +1,9 @@
 use std::path::{Path, PathBuf};
 
-use kc_device::DeviceAssessment;
-use kc_domain::{Address, CapabilityProfile, HostOperationReadiness};
+use kc_domain::{
+    Address, CapabilityProfile, DeviceDescriptor, HostOperationReadiness, MountPoint,
+    ReadinessReport,
+};
 
 pub fn format_capabilities(capabilities: &CapabilityProfile) -> String {
     let values = capabilities
@@ -22,35 +24,54 @@ pub fn path_display_name(path: &Path) -> String {
         .unwrap_or_else(|| PathBuf::from(path).display().to_string())
 }
 
-pub fn print_assessment(assessment: DeviceAssessment) {
-    println!("mount: {}", assessment.mount.root.display());
+pub fn print_assessment(
+    mount: &MountPoint,
+    descriptor: &DeviceDescriptor,
+    readiness: &ReadinessReport,
+    install_target: Option<&Address>,
+    backup_target: Option<&Address>,
+    install_root: Option<&Path>,
+    backup_root: Option<&Path>,
+) {
+    println!("mount: {}", mount.root.display());
+    println!("target: {}", descriptor.display_name);
+    println!("support level: {:?}", descriptor.support_level);
     println!(
-        "target: {} [{:?}]",
-        assessment.descriptor.display_name, assessment.descriptor.support_level
+        "current readiness: {}",
+        readiness_status_label(readiness.ready)
     );
-    println!("ready: {}", assessment.readiness.ready);
-    if assessment.readiness.blockers.is_empty() {
+    if readiness.blockers.is_empty() {
         println!("blockers: none");
     } else {
         println!("blockers:");
-        for blocker in assessment.readiness.blockers {
+        for blocker in &readiness.blockers {
             println!("- {blocker}");
         }
     }
-    println!(
-        "install target: {}",
-        format_address(&assessment.install_target)
-    );
-    println!(
-        "backup target: {}",
-        format_address(&assessment.backup_target)
-    );
-    println!("install root: {}", assessment.install_root.display());
-    println!("backup root: {}", assessment.backup_root.display());
+
+    match install_target {
+        Some(address) => println!("install target: {}", format_address(address)),
+        None => println!("install target: unavailable while current readiness is blocked"),
+    }
+    match backup_target {
+        Some(address) => println!("backup target: {}", format_address(address)),
+        None => println!("backup target: unavailable while current readiness is blocked"),
+    }
+    match install_root {
+        Some(path) => println!("install root: {}", path.display()),
+        None => println!("install root: unavailable while current readiness is blocked"),
+    }
+    match backup_root {
+        Some(path) => println!("backup root: {}", path.display()),
+        None => println!("backup root: unavailable while current readiness is blocked"),
+    }
 }
 
 pub fn print_host_operation(name: &str, readiness: &HostOperationReadiness) {
-    println!("{name} ready: {}", readiness.ready);
+    println!(
+        "{name} automation readiness: {}",
+        readiness_status_label(readiness.ready)
+    );
     if readiness.blockers.is_empty() {
         println!("{name} blockers: none");
     } else {
@@ -73,6 +94,14 @@ pub fn print_usage() {
     println!("Usage:");
     println!("  kc-diagnostic foundation");
     println!("  kc-diagnostic probe <device-root>");
+}
+
+fn readiness_status_label(ready: bool) -> &'static str {
+    if ready {
+        "ready"
+    } else {
+        "blocked"
+    }
 }
 
 fn format_address(address: &Address) -> String {
