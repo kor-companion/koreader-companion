@@ -1,6 +1,7 @@
 use kc_domain::{
     Address, BackupEntryKind, BackupManifestEntryRecord, ManifestRepository, TransportKind,
 };
+use std::path::PathBuf;
 
 use crate::sqlite::store::SqliteStore;
 use crate::PersistenceError;
@@ -26,7 +27,10 @@ fn rejects_manifest_entries_outside_source_root_on_save() {
     let error = store.save_manifest_internal(&manifest).unwrap_err();
     assert!(matches!(
         error,
-        PersistenceError::Domain(_) | PersistenceError::InvalidPath { .. }
+        PersistenceError::InvalidPath {
+            field: "backup_manifest.entry.source",
+            ..
+        }
     ));
 }
 
@@ -75,6 +79,59 @@ fn rejects_invalid_persisted_manifest_source_root_encoding_on_load() {
 }
 
 #[test]
+fn scoped_projection_failures_report_backup_field() {
+    let mut store = SqliteStore::in_memory().unwrap();
+    let mut manifest = sample_manifest();
+    manifest.entries[0].backup = Address::ScopedPath {
+        transport: TransportKind::LocalFilesystem,
+        scope: "backup-set-1".to_string(),
+        relative_path: PathBuf::from("../escape"),
+    };
+
+    let error = store.save_manifest_internal(&manifest).unwrap_err();
+    assert!(matches!(
+        error,
+        PersistenceError::InvalidPath {
+            field: "backup_manifest.entry.backup",
+            ..
+        }
+    ));
+}
+
+#[test]
+fn derived_source_relative_path_failures_report_source_field() {
+    let mut store = SqliteStore::in_memory().unwrap();
+    let manifest = kc_domain::BackupManifestRecord {
+        source_root: Address::ScopedPath {
+            transport: TransportKind::UsbMassStorage,
+            scope: "device".to_string(),
+            relative_path: PathBuf::from(".kobo"),
+        },
+        entries: vec![BackupManifestEntryRecord {
+            source: Address::ScopedPath {
+                transport: TransportKind::UsbMassStorage,
+                scope: "device".to_string(),
+                relative_path: PathBuf::from(".kobo/../escape"),
+            },
+            backup: Address::filesystem("/tmp/backups/kobo/escape"),
+            kind: BackupEntryKind::File,
+            size_bytes: 1,
+            checksum_hex: None,
+        }],
+        ..sample_manifest()
+    };
+
+    let error = store.save_manifest_internal(&manifest).unwrap_err();
+    assert!(matches!(
+        error,
+        PersistenceError::InvalidPath {
+            field: "backup_manifest.entry.source",
+            ..
+        }
+    ));
+}
+
+#[test]
 fn manifest_round_trips_scoped_source_roots() {
     let mut store = SqliteStore::in_memory().unwrap();
     let manifest = kc_domain::BackupManifestRecord {
@@ -98,6 +155,19 @@ fn manifest_round_trips_scoped_source_roots() {
     let loaded = ManifestRepository::load_manifest(&store, "backup-1")
         .unwrap()
         .unwrap();
+    assert_eq!(
+        loaded.source_root,
+        Address::scoped(TransportKind::UsbMassStorage, "device", ".kobo").unwrap()
+    );
+    assert_eq!(
+        loaded.entries[0].source,
+        Address::scoped(
+            TransportKind::UsbMassStorage,
+            "device",
+            ".kobo/Kobo/Kobo eReader.conf"
+        )
+        .unwrap()
+    );
     assert_eq!(
         loaded.entries[0].backup,
         Address::filesystem("/tmp/backups/kobo/Kobo eReader.conf")
@@ -135,4 +205,72 @@ fn manifests_round_trip_non_utf8_local_paths_losslessly() {
 
     assert_eq!(loaded.source_root, Address::filesystem(source_root));
     assert_eq!(loaded.entries[0].source, Address::filesystem(source_entry));
+}
+
+#[cfg(unix)]
+#[test]
+fn rejects_non_utf8_local_relative_components() {
+    use std::ffi::OsString;
+    use std::os::unix::ffi::OsStringExt;
+
+    let mut store = SqliteStore::in_memory().unwrap();
+    let manifest = kc_domain::BackupManifestRecord {
+        source_root: Address::filesystem(PathBuf::from(OsString::from_vec(vec![
+            b'/', b'm', b'n', b't', b'/', 0xFF,
+        ]))),
+        entries: vec![BackupManifestEntryRecord {
+            source: Address::filesystem(PathBuf::from(OsString::from_vec(vec![
+                b'/', b'm', b'n', b't', b'/', 0xFF, b'/', 0xFE, b'f', b'i', b'l', b'e',
+            ]))),
+            backup: Address::filesystem("/tmp/backups/file"),
+            kind: BackupEntryKind::File,
+            size_bytes: 1,
+            checksum_hex: None,
+        }],
+        ..sample_manifest()
+    };
+
+    let error = store.save_manifest_internal(&manifest).unwrap_err();
+    assert!(matches!(
+        error,
+        PersistenceError::InvalidPath {
+            field: "backup_manifest.entry.source",
+            ..
+        }
+    ));
+}
+
+#[cfg(unix)]
+#[test]
+fn rejects_non_utf8_scoped_relative_components() {
+    use std::ffi::OsString;
+    use std::os::unix::ffi::OsStringExt;
+
+    let mut store = SqliteStore::in_memory().unwrap();
+    let manifest = kc_domain::BackupManifestRecord {
+        source_root: Address::scoped(TransportKind::UsbMassStorage, "device", ".kobo").unwrap(),
+        entries: vec![BackupManifestEntryRecord {
+            source: Address::ScopedPath {
+                transport: TransportKind::UsbMassStorage,
+                scope: "device".to_string(),
+                relative_path: PathBuf::from(OsString::from_vec(vec![
+                    b'.', b'k', b'o', b'b', b'o', b'/', 0xFE, b'f', b'i', b'l', b'e',
+                ])),
+            },
+            backup: Address::filesystem("/tmp/backups/kobo/file"),
+            kind: BackupEntryKind::File,
+            size_bytes: 1,
+            checksum_hex: None,
+        }],
+        ..sample_manifest()
+    };
+
+    let error = store.save_manifest_internal(&manifest).unwrap_err();
+    assert!(matches!(
+        error,
+        PersistenceError::InvalidPath {
+            field: "backup_manifest.entry.source",
+            ..
+        }
+    ));
 }

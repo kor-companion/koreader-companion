@@ -15,10 +15,16 @@ pub fn derive_source_relative_path(
             validate_absolute_local_path("backup_manifest.source_root", root)?;
             validate_absolute_local_path("backup_manifest.entry.source", path)?;
             let contained = ContainmentPolicy::new(root)
-                .map_err(PersistenceError::from)?
+                .map_err(|_| PersistenceError::InvalidPath {
+                    field: "backup_manifest.source_root",
+                    value: root.display().to_string(),
+                })?
                 .contain(path)
-                .map_err(PersistenceError::from)?;
-            normalize_relative_path(&contained.relative_path)
+                .map_err(|_| PersistenceError::InvalidPath {
+                    field: "backup_manifest.entry.source",
+                    value: path.display().to_string(),
+                })?;
+            normalize_relative_path(&contained.relative_path, "backup_manifest.entry.source")
         }
         (
             Address::ScopedPath {
@@ -37,7 +43,7 @@ pub fn derive_source_relative_path(
                 field: "backup_manifest.entry.source",
                 value: format!("{source:?}"),
             })
-            .and_then(normalize_relative_path),
+            .and_then(|path| normalize_relative_path(path, "backup_manifest.entry.source")),
         (
             Address::Remote {
                 transport: root_transport,

@@ -10,7 +10,7 @@ pub fn validate_address_projection(
 ) -> Result<String, PersistenceError> {
     match address {
         Address::LocalPath(path) => local_projection(path, field),
-        Address::ScopedPath { relative_path, .. } => normalize_relative_path(relative_path),
+        Address::ScopedPath { relative_path, .. } => normalize_relative_path(relative_path, field),
         Address::Remote {
             locator: _, path, ..
         } => remote_projection(path, field),
@@ -24,7 +24,7 @@ fn local_projection(path: &Path, field: &'static str) -> Result<String, Persiste
     for component in path.components() {
         match component {
             Component::Prefix(_) | Component::RootDir | Component::CurDir => {}
-            Component::Normal(part) => parts.push(part.to_string_lossy().into_owned()),
+            Component::Normal(part) => parts.push(normalize_component(part, field)?),
             Component::ParentDir => {
                 return Err(PersistenceError::InvalidPath {
                     field,
@@ -73,21 +73,36 @@ fn derive_slash_suffix(
     Ok(candidate_segments[root_segments.len()..].join("/"))
 }
 
-pub(super) fn normalize_relative_path(path: &Path) -> Result<String, PersistenceError> {
+pub(super) fn normalize_relative_path(
+    path: &Path,
+    field: &'static str,
+) -> Result<String, PersistenceError> {
     let mut parts = Vec::new();
     for component in path.components() {
         match component {
             Component::CurDir => {}
-            Component::Normal(part) => parts.push(part.to_string_lossy().into_owned()),
+            Component::Normal(part) => parts.push(normalize_component(part, field)?),
             Component::ParentDir | Component::Prefix(_) | Component::RootDir => {
                 return Err(PersistenceError::InvalidPath {
-                    field: "backup_manifest.entry_relative_path",
+                    field,
                     value: path.display().to_string(),
                 });
             }
         }
     }
     Ok(parts.join("/"))
+}
+
+fn normalize_component(
+    part: &std::ffi::OsStr,
+    field: &'static str,
+) -> Result<String, PersistenceError> {
+    part.to_str()
+        .map(ToOwned::to_owned)
+        .ok_or_else(|| PersistenceError::InvalidPath {
+            field,
+            value: format!("non-utf8 path component in {}", part.to_string_lossy()),
+        })
 }
 
 fn normalize_slash_path(
